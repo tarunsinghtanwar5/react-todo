@@ -6,29 +6,33 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
-import { v4 as uuid } from 'uuid';
+import useTodoState from "./hooks/useTodoState";
+
 
 function Todo() {
     const defaultTodos = JSON.parse(window.localStorage.getItem("todos") || "[]");
+    const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodoState(
+        defaultTodos
+    );
 
-    const [todos, setTodos] = useState(defaultTodos);
-    const addTodo = newTodoText => {
-        setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
-    }
-    const removeTodo=todoId => {
-        const updatedTodos =todos.filter(todo => todo.id !==todoId);
-        setTodos(updatedTodos);
-    } 
-    const toggleTodo=todoId => {
-        const updatedTodos =todos.map(todo =>todo.id===todoId ? {...todo,completed: !todo.completed} : todo)
-        setTodos(updatedTodos);
+    // const [todos, setTodos] = useState(defaultTodos);
+    // const addTodo = newTodoText => {
+    //     setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
+    // }
+    // const removeTodo=todoId => {
+    //     const updatedTodos =todos.filter(todo => todo.id !==todoId);
+    //     setTodos(updatedTodos);
+    // } 
+    // const toggleTodo=todoId => {
+    //     const updatedTodos =todos.map(todo =>todo.id===todoId ? {...todo,completed: !todo.completed} : todo)
+    //     setTodos(updatedTodos);
 
-    }
-    const editTodo = ((todoId,newTask) => {
-        const updatedTodos = todos.map(todo => todo.id === todoId ? { ...todo, task:newTask } : todo)
-        setTodos(updatedTodos);
+    // }
+    // const editTodo = ((todoId,newTask) => {
+    //     const updatedTodos = todos.map(todo => todo.id === todoId ? { ...todo, task:newTask } : todo)
+    //     setTodos(updatedTodos);
 
-    })
+    // })
     useEffect(() => {
         window.localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);

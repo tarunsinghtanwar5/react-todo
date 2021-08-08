@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect } from 'react';
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import AppBar from '@material-ui/core/AppBar'
@@ -15,24 +15,7 @@ function Todo() {
         defaultTodos
     );
 
-    // const [todos, setTodos] = useState(defaultTodos);
-    // const addTodo = newTodoText => {
-    //     setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
-    // }
-    // const removeTodo=todoId => {
-    //     const updatedTodos =todos.filter(todo => todo.id !==todoId);
-    //     setTodos(updatedTodos);
-    // } 
-    // const toggleTodo=todoId => {
-    //     const updatedTodos =todos.map(todo =>todo.id===todoId ? {...todo,completed: !todo.completed} : todo)
-    //     setTodos(updatedTodos);
-
-    // }
-    // const editTodo = ((todoId,newTask) => {
-    //     const updatedTodos = todos.map(todo => todo.id === todoId ? { ...todo, task:newTask } : todo)
-    //     setTodos(updatedTodos);
-
-    // })
+    
     useEffect(() => {
         window.localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);

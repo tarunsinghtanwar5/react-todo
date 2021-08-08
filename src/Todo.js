@@ -1,28 +1,27 @@
-import React,{useState} from 'react';
-import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Grid from '@material-ui/core/Grid'
-import TodoList from './TodoList';
+import React from 'react';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-function Todo(){
-    const defaultTodos = [{ id: 1, task: "Clean Desk", completed: false }, { id:21, task: "Code a lot", completed: true }, { id: 3, task: "Read Google-Dev article", completed: false }
-    ]
-    const [todos, setTodos] = useState(defaultTodos);
-    return(
-        <Paper style={{padding:0,magin:0,height:'100vh',backgroundColor:'#fafafa'}} elevation={0}>
-        <AppBar color='primary' position='static' style={{height:'64px'}}>
-            <Toolbar>
-                <Typography color='inherit'>
-             TODOS REACT
-                </Typography>
-            </Toolbar>
-
-        </AppBar>
-    <TodoList todos={todos}/>
-        </Paper>
-    )
+function Todo({ id, task, completed, removeTodo, toggleTodo }) {
+	return (
+		<ListItem>
+            <Checkbox tabIndex={-1} checked={completed} onClick={() => toggleTodo(id)} />
+			<ListItemText style={{ textDecoration: completed ? 'line-through' : 'none' }}>{task}</ListItemText>
+			<ListItemSecondaryAction>
+				<IconButton aria-label="Delete" onClick={() => removeTodo(id)}>
+					<DeleteIcon />
+				</IconButton>
+				<IconButton aria-label="Edit">
+					<EditIcon />
+				</IconButton>
+			</ListItemSecondaryAction>
+		</ListItem>
+	);
 }
 
 export default Todo;
